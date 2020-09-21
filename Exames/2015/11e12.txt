@@ -1,0 +1,29 @@
+11)
+R(A,B,C,D,E,F)
+A->B; B->CD; AD->E
+
+-Base minima:
+
+A->B; B->C; B->D; AD->E
+
+-Verificar DFs redundantes:
+
+Não há
+
+-Verificar atributos redundantes:
+
+Testar AD->E
+Remover D: {A}+ = {A,B,C,D,E}
+Removar A: {D}+ = {D}
+
+D pode ser removido da relação
+
+-Voltar a combinar DFs com lados esquerdos iguais:
+
+A->BE; B->CD
+
+R1(A_,B,E) R2(B_,C,D)
+
+Acrescentar chave: R3(A_,F_)
+
+12)Nao viola, pois em qualquer DF o lado esquerdo é chave da respetiva relação

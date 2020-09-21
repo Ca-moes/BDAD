@@ -1,0 +1,14 @@
+.help para ver comandos
+
+.header on	-> mete nome de cada coluna
+.mode column	-> alinha colunas
+
+.read file para carregar o ficheiro 
+	fazer com criar e povoar
+	.read criar.sql
+	.read povoar.sql
+
+.quit para sair
+
+no CMD : >sqlite3.exe baseDados.db
+Para abrir uma base de dados ou criar se não existir

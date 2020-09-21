@@ -1,0 +1,106 @@
+-- Está em BCNF?
+Relação R com FD está na BCNF se por cada não trivial A->B, A é uma (super)key
+-- Passar para BCNF?
+Repeat until all relations are in BCNF: 
+- Pick any R’ with A->B that violates BCNF 
+- Extend FD that is used for decomposition (if A->B then A->BA+ ) 
+- Decompose R’ into R1(A, B) and R2(A, rest) 
+- Compute FDs for R1 and R2 
+- Compute keys for R1 and R2
+
+-- Chase Test?
+S (A, B, C, D) decomposed in 
+S1 (A, D), S2 (A,C) and S3 (B, C, D) 
+A->B; A->C; CD->A
+
+A	B	C	D
+a	b1	c1	d
+a	b2	c	d2
+a3	b	c	d
+Usar as FD para simplificar os que tem números á frente, quando tiver uma linha sem numeros, é uma lossless join decomposition
+
+-- Está em 3NF?
+Relation R is in 3NF if, 
+for each nontrivial Ᾱ→ B̅ , 
+  Ᾱ is a (super)key or
+  B̅ consists of prime attributes only
+-- Passar para 3NF? / 3NF Decomposition 
+R (A, B, C, D, E);
+AB->C, C->B and A->D
+
+1. Find a minimal basis for DFs
+ Right sides with only 1 attribute?  
+ No redundant DFs?
+  {A, B}+= {A, B, D}
+  {C}+ = {C}
+  {A}+ = {A}
+ No redundant attributes on left side?
+  On AB-> C, remove A, getting B->C. {B}+={B}. Since it does not contain C, the attribute A is essential
+  On AB->C, remove B, getting A->C. {A}+={AD}. Since it does not contain C, the attribute B is essential
+2. For each DF X->A in G, create a relation R’ (X, A)
+  R1 (A, B, C)
+  R2 (C, B)
+  R3 (A, D)
+3. If none of the relations of step 2 is a superkey for R, add another relation for a key for R
+  Keys: {A, B, E}, {A, C, E}
+  R4 should be one of them
+
+---
+se A->todos os atributos, A é uma chave. Uma key é uma superkey mínima, também chamada candidate key. Primary Key é uma das keys.
+Prime attribute - An attribute that is member of some key is prime.
+---
+
+SQLite3:
+.help para ver comandos
+.header on	-> mete nome de cada coluna
+.mode column	-> alinha colunas
+.read file para carregar o ficheiro 
+	fazer com criar e povoar
+	.read criar.sql
+	.read povoar.sql
+.quit para sair
+no CMD : >sqlite3.exe baseDados.db
+Para abrir uma base de dados ou criar se não existir﻿
+
+DDL:
+CREATE TABLE Package (
+id integer PRIMARY KEY, 
+idProd INTEGER REFERENCES Product(id) on UPDATE CASCADE NOT NULL, 
+amount INTEGER);
+
+---
+
+Exemplo SQL:
+drop table if exists Estudante;
+create table Estudante(ID int PRIMARY KEY, nome text, curso int REFERENCES Curso(ID), anoCurricular int);
+insert into Estudante values (201101510, 'Ana Lopes', 1, 1);
+
+Select Estudante.nome
+FROM Estudante, 
+    (SELECT ID1, count(*) as friends
+    FROM Amizade
+    GROUP By ID1
+    ) as A
+WHERE Estudante.ID = A.ID1 and friends > 3;
+
+
+SELECT DISTINCT Estudante.nome as nome, Estudante.anoCurricular as "Ano Curricular"
+FROM Estudante, Amizade
+WHERE Estudante.ID = Amizade.ID1 AND NOT EXISTS 
+    (SELECT * 
+    FROM Amizade A, Estudante E 
+    WHERE Estudante.ID = A.ID1 AND A.ID2 = E.ID AND Estudante.anoCurricular <> E.anoCurricular )
+ORDER BY Estudante.anoCurricular ASC, Estudante.nome ASC;
+
+
+Drop Trigger If Exists MigosForever;
+Create Trigger MigosForever
+After Insert On Estudante
+Begin
+    Insert into Amizade Select E1.id,E2.id From Estudante E1, Estudante E2 
+                        Where E1.id = new.id and E2.id <> New.id and E2.anoCurricular = new.anoCurricular;
+    Insert into Amizade Select E2.id,E1.id From Estudante E1, Estudante E2 
+                        Where E1.id = new.id and E2.id <> New.id and E2.anoCurricular = new.anoCurricular;
+End;
+Insert into Estudante values (201001519, 'Ricky Balboa', 1, 1);
+Select * From Amizade Where id1= 201001519;

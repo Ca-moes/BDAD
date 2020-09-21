@@ -1,0 +1,22 @@
+R(A,B,C,D,E)
+F={A->B, AC->D, BD->C, B->CE, E->A}
+
+-Base Minima:
+A->B, AC->D, BD->C, B->C, B->E, E->A
+
+-Verificar DFs redundantes
+BD->C pode ser removida pois é redundante ({B,D}+ = {B,C,D,E,A})
+
+-Verificar atributos redundantes
+AC->D
+
+{A}+ = {A,B,C,E,D}
+{C}+ = {C}
+(C pode ser removido da relação)
+
+A->D 
+
+-Voltar a combinar DFs com lados esquerdos iguais
+A->BD, B->CE, E->A
+
+R1(A_,B,D), R2(B_,C,E), R3(E_,A)

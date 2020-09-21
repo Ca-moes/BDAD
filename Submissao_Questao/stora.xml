@@ -1,0 +1,32 @@
+<question type="multichoice">
+    <name>
+        <text>Nome da pergunta</text>
+    </name>
+    <questiontext format="html">
+        <text>Enunciado</text>
+    </questiontext>
+    <answer fraction="100" format="html">
+        <text>Alternativa de resposta 1</text>
+        <feedback format="html">
+            <text>Explicar porque é esta a opção correta.</text>
+        </feedback>
+    </answer>
+    <answer fraction="" format="html">
+        <text>Alternativa de resposta 2</text>
+        <feedback format="html">
+            <text>Explicar porque não é esta a opção correta.</text>
+        </feedback>
+    </answer>
+    <answer fraction="" format="html">
+        <text>Alternativa de resposta 3</text>
+        <feedback format="html">
+            <text>Explicar porque não é esta a opção correta.</text>
+        </feedback>
+    </answer>
+    <answer fraction="" format="html">
+        <text>Alternativa de resposta 4</text>
+        <feedback format="html">
+            <text>Explicar porque não é esta a opção correta.</text>
+        </feedback>
+    </answer>
+</question>

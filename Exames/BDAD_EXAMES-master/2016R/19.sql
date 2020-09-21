@@ -1,0 +1,20 @@
+DROP TRIGGER IF EXISTS addMutuo;
+CREATE TRIGGER addMutuo
+AFTER INSERT ON Amizade
+BEGIN
+    INSERT INTO Amizade VALUES (New.ID2, New.ID1);
+END;
+
+DROP TRIGGER IF EXISTS removeMutuo;
+CREATE TRIGGER removeMutuo
+AFTER DELETE ON Amizade
+BEGIN
+    DELETE FROM Amizade WHERE Amizade.ID1=Old.ID2 AND Amizade.ID2=Old.ID1;
+END;
+
+DROP TRIGGER IF EXISTS atualiza;
+CREATE TRIGGER atualiza
+BEFORE UPDATE ON Amizade
+BEGIN
+    SELECT RAISE (ROLLBACK, 'Nao e possivel fazer update');
+END;

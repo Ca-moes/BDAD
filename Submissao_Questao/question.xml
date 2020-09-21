@@ -1,0 +1,67 @@
+<quiz>
+    <!--  question: 1   -->
+    <question type="multichoice">
+        <name>
+            <text>SQL to RL</text>
+        </name>
+        <questiontext format="html">
+            <text>
+                <![CDATA[
+<p>What's the equivalent of the following SQL query in Relational Algebra:&nbsp;</p><p>SELECT a,b FROM T1 NATURAL JOIN (SELECT * FROM T2 WHERE c='John');</p><p><br></p>
+]]>
+            </text>
+        </questiontext>
+        <generalfeedback format="html">
+            <text/>
+        </generalfeedback>
+        <defaultgrade>1</defaultgrade>
+        <penalty>0.3333333</penalty>
+        <hidden>0</hidden>
+        <idnumber>1</idnumber>
+        <single>true</single>
+        <shuffleanswers>true</shuffleanswers>
+        <answernumbering>abc</answernumbering>
+        <correctfeedback format="html">
+            <text>Your answer is correct.</text>
+        </correctfeedback>
+        <partiallycorrectfeedback format="html">
+            <text>Your answer is partially correct.</text>
+        </partiallycorrectfeedback>
+        <incorrectfeedback format="html">
+            <text>Your answer is incorrect.</text>
+        </incorrectfeedback>
+        <shownumcorrect/>
+        <answer fraction="0" format="html">
+            <text>
+                <![CDATA[ <p>σ a,b,c&nbsp; (T1 ⨝ T2)</p> ]]>
+            </text>
+            <feedback format="html">
+                <text/>
+            </feedback>
+        </answer>
+        <answer fraction="0" format="html">
+            <text>
+                <![CDATA[ <p>σ a,b (T1 ⨝ π c='John' (T2))</p><p><br></p> ]]>
+            </text>
+            <feedback format="html">
+                <text/>
+            </feedback>
+        </answer>
+        <answer fraction="100" format="html">
+            <text>
+                <![CDATA[ <p>π a,b (T1 ⨝ σ c='John' (T2))<br></p> ]]>
+            </text>
+            <feedback format="html">
+                <text/>
+            </feedback>
+        </answer>
+        <answer fraction="0" format="html">
+            <text>
+                <![CDATA[ <p>π c='John' (T1 ⨝ σ a,b (T2))</p><p><br></p> ]]>
+            </text>
+            <feedback format="html">
+                <text/>
+            </feedback>
+        </answer>
+    </question>
+</quiz>
