@@ -7,7 +7,8 @@
 
 Este repositório contém:
 - Projeto - made with [António](https://github.com/antbz) and [Filipe](https://github.com/filiperecharte)
-- Slides
+- Exames
+- Práticas
 
 ## Grades
 
